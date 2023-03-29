@@ -1,0 +1,30 @@
+body {
+    font-family: sans-serif;
+    margin: 0 auto;
+    padding: 0.01%;
+    max-width: 600px;
+    min-width: 600px;
+    background-color: #dfe6e9;
+    text-align: center;
+  }
+  h3 {
+    padding: 0;
+    font-weight: 900;
+    font-size: 200%;
+    text-align: center;
+    margin-top: 4rem;
+    color: #078570;
+    line-height: 1.2;
+
+  }
+  button {
+    appearance: none;
+    outline: 0;
+    background-color: white;
+    border: 0;
+    padding: 10px 15px;
+    color: #078570;
+    border-radius: 3px;
+    width: 250px;
+    font-size: 18px;
+  }
