@@ -6,6 +6,9 @@ import { useState } from "react";
 
 export default function Button(props) {
 
+   //disable button
+   const [disabled, setDisabled] = useState(false)
+
    //button styles
    const [mouseOv, setMouseOv] = useState(false)
 
@@ -22,7 +25,7 @@ export default function Button(props) {
 
 
 return(
-      <button style={{backgroundColor: mouseOv ? props.color : "white"}} onMouseOver={chageColor}  onMouseLeave={changeBack}
+      <button disabled={props.disabled} style={{backgroundColor: mouseOv ? props.color : "white"}} onMouseOver={chageColor}  onMouseLeave={changeBack}
       onClick={props.func}>{props.text}
       </button>
 )

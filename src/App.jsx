@@ -82,8 +82,10 @@ export default function App() {
           const tx = await contract.buyTickets(amount, { gasLimit: 200000, value: value });
           await tx.wait();
           cl('Transaction successful:', tx.hash);
+          alert('Transaction successful:' + tx.hash)
         } catch (error) {
           cl('Transaction failed:', error);
+          alert('Transaction failed: Make sure you have enough ETH and the sale is still on!');
         }
       };
     }

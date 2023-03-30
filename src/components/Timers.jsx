@@ -9,6 +9,9 @@ export default function Timers(props) {
     const [time,setTime] = useState("see time now");
     const [endTime,setEndTime] = useState("see when sale ends");
 
+
+
+
         //See time
         async function CheckTime() {
             if(typeof window.ethereum !== "undefuned") {
