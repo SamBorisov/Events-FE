@@ -1,7 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import EventContract from "./contracts/EventContract.json";
 
 import Button from './components/Button';
+import TokenImage from './components/GetNFT';
+import LuckyWinner from './components/LuckyWinner';
+import Timers from './components/Timers';
 
 import { init, useConnectWallet } from '@web3-onboard/react';
 import injectedModule from '@web3-onboard/injected-wallets';
@@ -11,7 +14,7 @@ import { ethers } from 'ethers';
 const cl = input => console.log(input)
 
 //smart contract address
-const eventAddress  = "0x61c36a8d610163660E21a8b7359e1Cac0C9133e1";
+const eventAddress  = "0xa16E02E87b7454126E5E10d957A927A7F5B5d2be";
 
 // for wallet connection
 const MAINNET_RPC_URL = 'https://mainnet.infura.io/v3/' + APP_INFURA_API_KEY;
@@ -40,6 +43,11 @@ init({
 
 export default function App() {
 
+  const [amount, setAmount] = useState(0);
+  const [ticketBalance, setTicketBalance] = useState("");
+
+
+
     //conect wallet
     const [{ wallet, connecting }, connect, disconnect] = useConnectWallet()
     
@@ -55,37 +63,31 @@ export default function App() {
         try {
           const data = await contract.getTicketBalance();
           cl(data.toString())
+          setTicketBalance(data.toString())
         } catch(err) {
           cl('err: ',err)
         }
       }
     }
 
-    async function BuyTicket() {
-      if(typeof window.ethereum !== "undefuned") {
-        const contract = new ethers.Contract(eventAddress, EventContract.abi ,provider)
-        try {
-          const data = await contract.buyTickets(1);
-          cl(data.toString())
-        } catch(err) {
-          cl('err: ',err)
-        }
-      }
-    }
-    
-      async function buyTickets(amount) {
+ 
+    // buy tickets
+      const handleSubmit = async (event) => {
         if(typeof window.ethereum !== "undefuned") {
-          const contract = new ethers.Contract(eventAddress, EventContract.abi ,provider)
+        const contract = new ethers.Contract(eventAddress, EventContract.abi ,provider.getSigner())
+        event.preventDefault();
+        const price = await contract.priceForEvent();
+        const value = ethers.utils.parseEther((price * amount).toString());
         try {
-          const price = await contract.methods.priceForEvent().call();
-          const value = web3.utils.toWei((price * amount).toString(), 'ether'); // calculate the amount of ETH to send
-          const receipt = await contract.methods.buyTickets(amount).send({ value }); // call the function and send the ETH
-          console.log(receipt); // log the transaction receipt
+          const tx = await contract.buyTickets(amount, { gasLimit: 200000, value: value });
+          await tx.wait();
+          cl('Transaction successful:', tx.hash);
         } catch (error) {
-          console.error(error); // handle any errors that occur
+          cl('Transaction failed:', error);
         }
-      }
-      }
+      };
+    }
+
 
 
 
@@ -99,9 +101,22 @@ export default function App() {
             </div>
         :
             <div>
-              <h1>Wellcome</h1>
-              <Button func={CheckBalance} text="Check Balance" color="#B1B1B1"/>
-              <Button func={buyTickets} text="Call" color="#B1B1B1"/>
+              <h3>Wellcome</h3>
+              <Button func={CheckBalance} text={`Balance: ${ticketBalance}`} color="#B1B1B1"/>
+              <form>
+                <label>
+                 <h4>Number of tickets:</h4>
+                  <input type="number" min="1" value={amount} onChange={(e) => setAmount(e.target.value)} />
+                </label>
+                <Button func={handleSubmit} text="Buy tickets" color="#B1B1B1"/>
+              </form>
+
+              <TokenImage address={eventAddress}  abi={EventContract.abi} provider={provider}/>
+
+             <LuckyWinner address={eventAddress}  abi={EventContract.abi} provider={provider}/>
+
+             <Timers address={eventAddress}  abi={EventContract.abi} provider={provider}/>
+
             </div>
         }
 

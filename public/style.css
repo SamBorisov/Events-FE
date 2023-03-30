@@ -27,4 +27,34 @@ body {
     border-radius: 3px;
     width: 250px;
     font-size: 18px;
+    margin: 2%;
+  }
+  img {
+    max-width: 50%;
+  }
+  input {
+    border: 1px solid rgba(252, 252, 252, 0.4);
+    background-color: rgba(252, 252, 252, 0.2);
+    width: 250px;
+    border-radius: 3px;
+    font-family: "Source Sans Pro", sans-serif;
+    padding: 10px 15px;
+    margin: 0 auto 10px auto;
+    display: block;
+    text-align: center;
+    font-size: 18px;
+    color:#078570;
+    font-weight: 300;
+  }
+  form {
+    padding: 20px 0;
+    position: relative;
+  }
+  h4 {
+    font-weight: 900;
+    font-size: 150%;
+    text-align: center;
+    color: #37b6a1;
+    line-height: 1.2;
+
   }
