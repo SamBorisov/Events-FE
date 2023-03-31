@@ -10,8 +10,6 @@ export default function Timers(props) {
     const [endTime,setEndTime] = useState("see when sale ends");
 
 
-
-
         //See time
         async function CheckTime() {
             if(typeof window.ethereum !== "undefuned") {
@@ -23,7 +21,7 @@ export default function Timers(props) {
                 const timestampInSeconds = bigNumber.toNumber();
 
                 const date = new Date(timestampInSeconds * 1000);
-                const dateString = date.toLocaleString(); // '2022-12-12 09:45:39'
+                const dateString = date.toLocaleString(); 
                 setTime(dateString)
 
               } catch(err) {
@@ -43,7 +41,7 @@ export default function Timers(props) {
                 const timestampInSeconds = bigNumber.toNumber();
 
                 const date = new Date(timestampInSeconds * 1000);
-                const dateString = date.toLocaleString(); // '2022-12-12 09:45:39'
+                const dateString = date.toLocaleString(); 
                 setEndTime(dateString)
 
               } catch(err) {
@@ -58,7 +56,7 @@ return(
     <div>
 
         <Button func={CheckTime} text={time} color="#B1B1B1"/>
-        <Button func={CheckEndTime} text={endTime} color="#B1B1B1"/>
+        <Button func={CheckEndTime} text={endTime} color="#ffa07a"/>
 
     </div>
 
