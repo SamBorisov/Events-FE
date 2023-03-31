@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import EventContract from "./contracts/EventContract.json";
 
 import Button from './components/Button';
-import TokenImage from './components/GetNFT';
+import Event from './components/Event';
 import LuckyWinner from './components/LuckyWinner';
 import Timers from './components/Timers';
 
@@ -113,7 +113,7 @@ export default function App() {
                 <Button func={handleSubmit} text="Buy tickets" color="#B1B1B1"/>
               </form>
 
-              <TokenImage address={eventAddress}  abi={EventContract.abi} provider={provider}/>
+              <Event address={eventAddress}  abi={EventContract.abi} provider={provider}/>
 
              <LuckyWinner address={eventAddress}  abi={EventContract.abi} provider={provider}/>
 
