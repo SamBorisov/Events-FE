@@ -24,5 +24,5 @@ Contracts - `https://github.com/SamBorisov/Events`
 - Insert a private key from the Hardhat node with ether to Metamask to interact with the contracts.
 ![image](https://user-images.githubusercontent.com/88675952/229177869-0aa97b9f-99e7-4d13-9352-a218421d599d.png)
 - Click the "Balance" button to see your ticket balance. Choose a number for the number of tickets you want to buy and press the "Buy Tickets" button. You can see the current and end time by clicking on the "BTN current and end time". After the sale ends, you can call "Get Lucky Winner" and see the lucky winner's address after it was chosen. (there should be at least 1 bought ticket)
-- If you encounter problems with the blocks number or nonce, reset your Metamask account from settings/advanced.
+- If you encounter problems with the blocks number (change the network then go agaon to localhost) or nonce, reset your Metamask account from settings/advanced.
 ![image](https://user-images.githubusercontent.com/88675952/229178583-d31f8c84-3da9-40f5-af46-7283983ddf04.png)
