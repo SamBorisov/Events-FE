@@ -2,18 +2,24 @@ import React from "react"
 import { useState } from 'react';
 import { ethers, BigNumber } from 'ethers';
 import Button from "./Button";
+import { abi } from '../contracts/constants';
 
 
 export default function Timers(props) {
 
     const [time,setTime] = useState("see time now");
-    const [endTime,setEndTime] = useState("see when sale ends");
+    const [endTime,setEndTime] = useState(() => {
+        const storedEndTime = localStorage.getItem('endTime');
+        return storedEndTime === null ? "see end time" : storedEndTime 
+       
+      });
+    
 
 
         //See time
         async function CheckTime() {
-            if(typeof window.ethereum !== "undefuned") {
-              const contract = new ethers.Contract(props.address, props.abi ,props.provider)
+            if(typeof window.ethereum !== "undefined") {
+              const contract = new ethers.Contract(props.address, abi ,props.provider)
               try {
                 const time = await contract.getCurrentTimestamp();
 
@@ -32,8 +38,8 @@ export default function Timers(props) {
 
           //See end time
         async function CheckEndTime() {
-            if(typeof window.ethereum !== "undefuned") {
-              const contract = new ethers.Contract(props.address, props.abi ,props.provider)
+            if(typeof window.ethereum !== "undefined") {
+              const contract = new ethers.Contract(props.address, abi ,props.provider)
               try {
                 const time = await contract.getEndTimestamp();
 
@@ -43,6 +49,7 @@ export default function Timers(props) {
                 const date = new Date(timestampInSeconds * 1000);
                 const dateString = date.toLocaleString(); 
                 setEndTime(dateString)
+                localStorage.setItem('endTime', dateString);
 
               } catch(err) {
                 console.error('err: ',err)

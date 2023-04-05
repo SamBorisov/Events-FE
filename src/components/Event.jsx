@@ -1,6 +1,7 @@
 import React from "react"
 import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
+import { abi } from '../contracts/constants';
 
 export default function Event(props) {
 
@@ -12,7 +13,7 @@ export default function Event(props) {
     useEffect(() => {
         async function fetchEvent() {
             if(typeof window.ethereum !== "undefuned") {
-                const contract = new ethers.Contract(props.address, props.abi ,props.provider)
+                const contract = new ethers.Contract(props.address, abi ,props.provider)
 
           const tokenUri = await contract.getUri(); 
           const eventName = await contract.getEventName(); 

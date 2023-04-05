@@ -2,19 +2,24 @@ import React from "react"
 import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import Button from "./Button";
+import { abi } from '../contracts/constants';
 
 
 export default function LuckyWinner(props) {
 
-    const [luckyWinner, setLuckyWinner] = useState("");
+    const [luckyWinner, setLuckyWinner] = useState(() => {
+      const storedWinner = localStorage.getItem('winner');
+      return storedWinner === null ? "" : storedWinner 
+    });
+    
 
     const [hasLuckyWinner, setHasLuckyWinner] = useState(false);
 
 
     useEffect(() => {
         async function HasWinner() {
-            if(typeof window.ethereum !== "undefuned") {
-                const contract = new ethers.Contract(props.address, props.abi ,props.provider)
+            if(typeof window.ethereum !== "undefined") {
+                const contract = new ethers.Contract(props.address, abi ,props.provider)
                 try {
                     const winner = await contract.getLuckyWinnerAddress();
                     console.log(winner.toString())
@@ -34,12 +39,14 @@ export default function LuckyWinner(props) {
 
         //Get Lucky Winner
         async function GetWinner() {
-            if(typeof window.ethereum !== "undefuned") {
-              const contract = new ethers.Contract(props.address, props.abi ,props.provider.getSigner())
+            if(typeof window.ethereum !== "undefined") {
+              const contract = new ethers.Contract(props.address, abi ,props.provider.getSigner())
               try {
                 const winner = await contract.chooseLuckyWinner({ gasLimit: 200000});
-                setLuckyWinner(winner.toString())
+                const luckyWinnerStr = winner.toString()
+                setLuckyWinner(luckyWinnerStr)
                 setHasLuckyWinner(true)
+                localStorage.setItem('winner', luckyWinnerStr);
                 alert("We Got a Lucky Winner!")
               } catch(err) {
                 console.error('err: ',err)
@@ -48,11 +55,13 @@ export default function LuckyWinner(props) {
           }
               //See Lucky Winner
         async function SeeWinner() {
-            if(typeof window.ethereum !== "undefuned") {
-              const contract = new ethers.Contract(props.address, props.abi ,props.provider)
+            if(typeof window.ethereum !== "undefined") {
+              const contract = new ethers.Contract(props.address, abi ,props.provider)
               try {
                 const winner = await contract.getLuckyWinnerAddress();
-                setLuckyWinner(winner.toString())
+                const luckyWinnerStr = winner.toString()
+                setLuckyWinner(luckyWinnerStr)
+                localStorage.setItem('winner', luckyWinnerStr);
               } catch(err) {
                 console.error('err: ',err)
               }
