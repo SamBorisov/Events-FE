@@ -45,7 +45,7 @@ export default function App() {
   const [amount, setAmount] = useState(0);
   const [ticketBalance, setTicketBalance] = useState(() => {
     const storedBalance = localStorage.getItem('ticketBalance');
-    return storedBalance === null ? "" : storedBalance 
+    return storedBalance === null ? 0 : storedBalance 
   });
 
 
@@ -82,6 +82,7 @@ export default function App() {
         const contract = new ethers.Contract(eventAddress, abi ,provider.getSigner())
         event.preventDefault();
         const amonthToNum = parseInt(amount);
+        const stateTicketNum = parseInt(ticketBalance);
         const price = await contract.priceForEvent();
         const value = ethers.utils.parseEther((price * amonthToNum).toString());
         try {
@@ -90,7 +91,8 @@ export default function App() {
             await tx.wait();
             cl('Transaction successful:', tx.hash);
             alert('Transaction successful:' + tx.hash)
-            localStorage.setItem('ticketBalance', ticketBalance + amonthToNum);
+            localStorage.setItem('ticketBalance', stateTicketNum + amonthToNum);
+            setTicketBalance(stateTicketNum + amonthToNum)
           } else {
             cl("Not valid amount of tickets")
             alert("Not valid amount of tickets")
