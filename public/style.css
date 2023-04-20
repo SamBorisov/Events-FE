@@ -58,3 +58,13 @@ body {
     line-height: 1.2;
 
   }
+  .event{
+    width: 700px;
+    height: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
+    border: 5px solid #078570; 
+    outline: 5px dotted #078570;
+    outline-offset: -20px;
+  }
