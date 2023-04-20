@@ -3,17 +3,14 @@ import React, {useState} from 'react';
 import Button from './components/Button';
 import Event from './components/Event';
 import LuckyWinner from './components/LuckyWinner';
-import Timers from './components/Timers';
 
-import { init, useConnectWallet } from '@web3-onboard/react';
+import { init, useConnectWallet, useWallets } from '@web3-onboard/react';
 import injectedModule from '@web3-onboard/injected-wallets';
-import { APP_INFURA_API_KEY, abi } from './contracts/constants';
+import { APP_INFURA_API_KEY, abi, eventAddress } from './contracts/constants';
 import { ethers } from 'ethers';
 
 const cl = input => console.log(input)
 
-//smart contract address
-const eventAddress  = "0xa16E02E87b7454126E5E10d957A927A7F5B5d2be";
 
 // for wallet connection
 const MAINNET_RPC_URL = 'https://mainnet.infura.io/v3/' + APP_INFURA_API_KEY;
@@ -42,6 +39,8 @@ init({
 
 export default function App() {
 
+  const connectedWallets = useWallets()
+
   const [amount, setAmount] = useState(0);
   const [ticketBalance, setTicketBalance] = useState(() => {
     const storedBalance = localStorage.getItem('ticketBalance');
@@ -57,23 +56,23 @@ export default function App() {
     
     if (wallet) {
         var provider = new ethers.providers.Web3Provider(wallet.provider, 'any')
-        console.log(wallet.accounts[0].address)
+        cl(wallet.accounts[0].address)
       }
 
     //Check Ticket Balance 
-    async function CheckBalance() {
-      if(typeof window.ethereum !== "undefined") {
-        const contract = new ethers.Contract(eventAddress, abi ,provider)
-        try {
-          const data = await contract.getTicketBalance();
-          localStorage.setItem('ticketBalance', ticketBalance);
-          cl(data.toString())
-          setTicketBalance(data.toString())
-        } catch(err) {
-          cl('err: ',err)
-        }
-      }
-    }
+    // async function CheckBalance() {
+    //   if(typeof window.ethereum !== "undefined") {
+    //     const contract = new ethers.Contract(eventAddress, abi ,provider)
+    //     try {
+    //       const data = await contract.getTicketBalance();
+    //       localStorage.setItem('ticketBalance', ticketBalance);
+    //       cl(data.toString())
+    //       setTicketBalance(data.toString())
+    //     } catch(err) {
+    //       cl('err: ',err)
+    //     }
+    //   }
+    // }
 
  
     // buy tickets
@@ -117,21 +116,19 @@ export default function App() {
             </div>
         :
             <div>
-              <h3>Wellcome</h3>
-              <Button func={CheckBalance} text={`Balance: ${ticketBalance}`} color="#B1B1B1"/>
+              <h3>Welcome</h3>
+
+              <Event address={eventAddress}  provider={provider}/>
+
               <form>
                 <label>
-                 <h4>Number of tickets:</h4>
+                 <h4>Number of tickets: {ticketBalance}</h4>
                   <input type="number" min="1" value={amount} onChange={(e) => setAmount(e.target.value)} />
                 </label>
                 <Button func={handleSubmit} text="Buy tickets" color="#B1B1B1"/>
               </form>
 
-              <Event address={eventAddress}  provider={provider}/>
-
              <LuckyWinner address={eventAddress} provider={provider}/>
-
-             <Timers address={eventAddress}  provider={provider}/>
 
             </div>
         }
