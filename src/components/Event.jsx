@@ -47,11 +47,11 @@ export default function Event(props) {
 return(
     <div className="event">
 
-    <h4> {eName}</h4>
-    <img src={tokenUri} alt="Token Image" />
+    <h4 className="eventName"> {eName}</h4>
     <h4> {eDetails}</h4>
     <h4>Price: {ePrice} Ether</h4>
     <h4>Sale end time : {endTime}</h4>
+    <img src={tokenUri} alt="Token Image" />
 
 
     </div>

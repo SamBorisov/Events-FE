@@ -73,6 +73,9 @@ export default function LuckyWinner(props) {
 return(
 
     <div>
+        <hr></hr>
+
+        <h4 className="eventName">After Ticket Sale End</h4>
 
         <Button func={GetWinner} text="Get Lucky Winner"  color="#B1B1B1" disabled={hasLuckyWinner}/>
         <Button func={SeeWinner} text="See Lucky Winner" color="#B1B1B1" disabled={!hasLuckyWinner}/>

@@ -4,7 +4,7 @@ import Button from './components/Button';
 import Event from './components/Event';
 import LuckyWinner from './components/LuckyWinner';
 
-import { init, useConnectWallet, useWallets } from '@web3-onboard/react';
+import { init, useConnectWallet } from '@web3-onboard/react';
 
 import injectedModule from '@web3-onboard/injected-wallets';
 import { APP_INFURA_API_KEY, abi, eventAddress } from './contracts/constants';
@@ -44,7 +44,6 @@ init({
 
 export default function App() {
 
-  const connectedWallets = useWallets()
 
   const [amount, setAmount] = useState(0);
   const [ticketBalance, setTicketBalance] = useState(() => {
@@ -64,20 +63,6 @@ export default function App() {
     cl(wallet.accounts[0].address)
   }
 
-  //Check Ticket Balance 
-  // async function CheckBalance() {
-  //   if(typeof window.ethereum !== "undefined") {
-  //     const contract = new ethers.Contract(eventAddress, abi ,provider)
-  //     try {
-  //       const data = await contract.getTicketBalance();
-  //       localStorage.setItem('ticketBalance', ticketBalance);
-  //       cl(data.toString())
-  //       setTicketBalance(data.toString())
-  //     } catch(err) {
-  //       cl('err: ',err)
-  //     }
-  //   }
-  // }
 
 
   // buy tickets
@@ -117,13 +102,13 @@ export default function App() {
         </div>
         :
         <div>
-          <h3>Welcome</h3>
+          <h3>Get This Amazing NFT ticket to enter the event!</h3>
 
           <Event address={eventAddress} provider={provider} />
 
           <form>
             <label>
-              <h4>Number of tickets: {ticketBalance}</h4>
+              <h4 className='eventName'>Your Ticket Balance: {ticketBalance}</h4>
               <input type="number" min="1" value={amount} onChange={(e) => setAmount(e.target.value)} />
             </label>
             <Button func={handleSubmit} text="Buy tickets" color="#B1B1B1" />

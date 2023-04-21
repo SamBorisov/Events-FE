@@ -2,9 +2,8 @@ body {
     font-family: sans-serif;
     margin: 0 auto;
     padding: 0.01%;
-    max-width: 600px;
     min-width: 600px;
-    background-color: #dfe6e9;
+    background-image: url("https://images8.alphacoders.com/123/1239296.jpg");
     text-align: center;
   }
   h3 {
@@ -13,7 +12,7 @@ body {
     font-size: 200%;
     text-align: center;
     margin-top: 4rem;
-    color: #078570;
+    color: #b16ed8;
     line-height: 1.2;
 
   }
@@ -30,7 +29,7 @@ body {
     margin: 2%;
   }
   img {
-    max-width: 50%;
+    max-width: 70%;
   }
   input {
     border: 1px solid rgba(252, 252, 252, 0.4);
@@ -54,17 +53,39 @@ body {
     font-weight: 900;
     font-size: 150%;
     text-align: center;
-    color: #37b6a1;
-    line-height: 1.2;
-
+    color: #43dfeb;
+    border: 2px solid #000;
+    padding: 10px;
+    background-color: rgb(60, 71, 77);
+    margin-left: 10%;
+    margin-right: 10%;
   }
   .event{
-    width: 700px;
-    height: 600px;
+    width: 1100px;
+    height: 830px;
     margin-left: auto;
     margin-right: auto;
+    justify-content: center;
     padding: 0;
-    border: 5px solid #078570; 
-    outline: 5px dotted #078570;
+    border: 5px solid #43dfeb; 
+    outline: 5px dotted #43dfeb;
     outline-offset: -20px;
+    background-image: url("https://images.unsplash.com/photo-1617791160505-6f00504e3519?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8NHxDVFJUdTk0ZnU5b3x8ZW58MHx8fHw%3D&w=1000&q=80");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .event h4 {
+    text-align: left;
+    padding-left: 10%;
+  }
+  .eventName {
+    text-align: center !important;
+    padding: 10px 0 !important;
+    margin-left: 30%;
+    margin-right: 30%;
+  }
+  hr {
+    border: none;
+    height: 4px;
+    background-image: linear-gradient(to right, #782ba5, #914fb8 20%, #43dfeb 20%, #43dfeb 80%, #914fb8 80%, #782ba5);
   }
