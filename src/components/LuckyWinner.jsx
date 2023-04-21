@@ -34,7 +34,7 @@ export default function LuckyWinner(props) {
                   }}
             }
             HasWinner();
-            }, []);
+            }, [hasLuckyWinner, props.address, props.provider]);
 
 
         //Get Lucky Winner
