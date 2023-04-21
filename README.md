@@ -6,8 +6,7 @@ Contracts - `https://github.com/SamBorisov/Events`
 - App.jsx - for wallet integration , buy tickets fuctionality and check ticket balance (import abi and have the contract address there)
 - Button.jsx - helper button component
 - Event - fetches the nessesery details about the event and render them
-- Timer - Fetches the current timestamp and he end of the tickets sale (see them by clicking on the btn)
-- Lucky Winner - fetch to see if there is one(disable the btn "see lucky winner" if not any, and functions to get the lucky winner (after event ends)  and see his adress after it was chosen
+- Lucky Winner - fetch to see if there is one(disable the btn "see lucky winner" if not any, and functions to get the lucky winner (after event ends)  and see his adress after it was chosen)
 
 ## Usage
 - Install necessary packages: `npm install`
