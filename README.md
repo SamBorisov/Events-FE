@@ -1,6 +1,6 @@
 # Events FE
 
-Contracts - `https://github.com/SamBorisov/Events` 
+Contracts - `https://github.com/SamBorisov/Events-C` 
 
 ## Components
 - App.jsx - for wallet integration , buy tickets fuctionality and check ticket balance (import abi and have the contract address there)
